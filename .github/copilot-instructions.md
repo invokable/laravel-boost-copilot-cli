@@ -10,6 +10,8 @@ This is a Laravel package that provides custom CodeEnvironment integration for G
 - **Framework**: Laravel 12.x+
 - **Dependencies**: Laravel Boost 1.6+
 - **Target Platforms**: macOS, WSL/Ubuntu, Linux (Windows not supported)
+- **Testing**: Pest PHP 4.x
+- **Code Quality**: Laravel Pint (PSR-12)
 
 ## Architecture
 
@@ -34,14 +36,17 @@ This is a Laravel package that provides custom CodeEnvironment integration for G
 ## Code Style Guidelines
 
 ### PHP Standards
-- Follow PSR-12 coding standards
-- Use strict types declaration
-- Use return type declarations
+- Follow PSR-12 coding standards (enforced by Laravel Pint)
+- Use strict types declaration (`declare(strict_types=1);`)
+- Use return type declarations for all methods
 - Follow Laravel conventions and best practices
+- Run `composer lint` before committing
+- Verify formatting with `composer test:lint`
 
 ### Namespace Convention
 - Root namespace: `Revolution\Laravel\Boost`
 - Follow PSR-4 autoloading standards
+- Test namespace: `Tests\`
 
 ## Development Guidelines
 
@@ -59,10 +64,36 @@ This is a Laravel package that provides custom CodeEnvironment integration for G
    - `.github/mcp-config.json`: MCP server configuration
 
 ### Testing Approach
-- Test with `php artisan boost:install` command
+
+#### Automated Tests
+- **Framework**: Pest PHP with Orchestra Testbench
+- **Run tests**: `composer test` or `vendor/bin/pest`
+- **Test coverage**: `vendor/bin/pest --coverage`
+- **Test structure**: 
+  - `tests/Feature/` - Feature tests for main functionality
+  - `tests/TestCase.php` - Base test case with package provider setup
+  - `tests/Pest.php` - Pest configuration and architecture presets
+  - `tests/ArchTest.php` - Architecture rules and code quality checks
+
+#### Writing Tests
+- Use Pest PHP syntax (test functions, not classes)
+- Mock `DetectionStrategyFactory` for unit tests
+- Test public methods and behavior, not implementation details
+- Use descriptive test names: `test('description of expected behavior')`
+- Use temporary directories for file system tests and clean up after
+- Follow the pattern in existing tests
+
+#### Integration Tests
+- Test with `php artisan boost:install` command in a Laravel project
 - Verify file generation in `.github/` directory
 - Test with actual Copilot CLI: `copilot --additional-mcp-config @.github/mcp-config.json`
 - Confirm "Configured MCP servers: laravel-boost" appears
+
+#### Test Requirements
+- All tests must pass before merging: `composer test`
+- Code must pass linting: `composer test:lint`
+- Maintain test coverage above 90%
+- Write tests for all new features and bug fixes
 
 ## Package Integration
 
@@ -97,29 +128,80 @@ This is a Laravel package that provides custom CodeEnvironment integration for G
 ## Common Tasks
 
 ### Adding New Detection Methods
-- Update `systemDetectionConfig()` or `projectDetectionConfig()`
-- Keep detection lightweight and fast
+1. Update `systemDetectionConfig()` or `projectDetectionConfig()`
+2. Keep detection lightweight and fast
+3. Write tests in `tests/Feature/CopilotCliTest.php`
+4. Run `composer test` to verify
 
 ### Modifying MCP Configuration
-- Edit `installFileMcp()` method
-- Ensure backward compatibility with existing configs
-- Validate JSON format before writing
+1. Edit `installFileMcp()` method
+2. Ensure backward compatibility with existing configs
+3. Validate JSON format before writing
+4. Add test cases for the new configuration
+5. Test with temporary directories in tests
+
+### Adding New Features
+1. Write tests first (TDD approach)
+2. Implement the feature
+3. Run `composer test` to verify tests pass
+4. Run `composer lint` to format code
+5. Verify with `composer test:lint`
+6. Update documentation if needed
 
 ### Updating Documentation
 - Update README.md for user-facing changes
 - Keep installation instructions clear and concise
 - Include version requirements
+- Update this file for development guideline changes
 
 ## Dependencies Management
 
-- Keep dependencies minimal
-- Only depend on Laravel core packages and Laravel Boost
-- Development-only package (require-dev in user projects)
+### Production Dependencies
+- Keep minimal: only Laravel core packages and Laravel Boost
+- PHP 8.3+ required
+- Laravel 12.x+ required
+
+### Development Dependencies
+- `pestphp/pest` - Testing framework
+- `orchestra/testbench` - Package testing support
+- `mockery/mockery` - Mocking library
+- `laravel/pint` - Code formatter
+
+### Installation
+- This package is development-only (require-dev in user projects)
+- Run `composer install` to set up development environment
+
+## Development Workflow
+
+### Before Committing
+1. Run all tests: `composer test`
+2. Format code: `composer lint`
+3. Verify formatting: `composer test:lint`
+4. Check test coverage: `vendor/bin/pest --coverage`
+5. Ensure all tests pass in CI (GitHub Actions)
+
+### Continuous Integration
+- **GitHub Actions**: `.github/workflows/tests.yml`
+- Tests run on PHP 8.3 and 8.4
+- Runs on every push and pull request to main branch
+- Must pass before merging
+
+### Composer Scripts
+```bash
+composer test          # Run all tests
+composer lint          # Format code with Pint
+composer test:lint     # Check code formatting
+```
 
 ## Release Notes
 
 When preparing releases, ensure:
+- All tests pass: `composer test`
+- Code is properly formatted: `composer test:lint`
+- Test coverage remains above 90%
 - Compatibility with Laravel Boost version requirements
 - Test with latest Copilot CLI version
 - Update README.md if installation steps change
+- Update CHANGELOG.md (if exists)
 - Follow semantic versioning
+- Tag releases appropriately
