@@ -1,0 +1,39 @@
+{
+    "name": "revolution/laravel-boost-copilot-cli",
+    "description": "Laravel Boost Custom CodeEnvironment for GitHub Copilot CLI",
+    "keywords": [
+        "laravel",
+        "boost",
+        "copilot-cli"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.3",
+        "illuminate/support": "^12.30",
+        "laravel/boost": "^1.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Revolution\\Laravel\\Boost\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "puklipo",
+            "email": "pcs.engineer.team@gmail.com"
+        },
+        {
+            "name": "kawax",
+            "email": "kawaxbiz@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Revolution\\Laravel\\Boost\\CopilotCliServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable"
+}
