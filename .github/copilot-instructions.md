@@ -119,7 +119,7 @@ This is a Laravel package that provides custom CodeEnvironment integration for G
 
 ## Important Constraints
 
-1. **Platform Support**: Do NOT add Windows native support (only WSL/Ubuntu on Windows)
+1. **Platform Support**: Do NOT add Windows native support (only WSL on Windows)
 2. **PHP Version**: Minimum PHP 8.3
 3. **Laravel Version**: Minimum Laravel 12.x
 4. **File Structure**: Keep configuration files in `.github/` directory
