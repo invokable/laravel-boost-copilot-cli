@@ -14,7 +14,7 @@
 
 ## Support OS
 - macOS
-- WSL/Ubuntu (Standard Windows environment is not supported)
+- WSL (Native Windows environment is not supported)
 - Linux
 
 ## Installation
