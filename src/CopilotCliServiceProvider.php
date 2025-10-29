@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Revolution\Laravel\Boost;
 
-use Laravel\Boost\Boost;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Boost\Boost;
 
 class CopilotCliServiceProvider extends ServiceProvider
 {
