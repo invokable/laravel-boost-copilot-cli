@@ -15,11 +15,18 @@
     },
     "require-dev": {
         "laravel/pint": "^1.25",
-        "orchestra/testbench": "^10.6"
+        "orchestra/testbench": "^10.6",
+        "pestphp/pest": "^4.1",
+        "mockery/mockery": "^1.6"
     },
     "autoload": {
         "psr-4": {
             "Revolution\\Laravel\\Boost\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
         }
     },
     "authors": [
@@ -41,8 +48,17 @@
     },
     "minimum-stability": "stable",
     "scripts": {
+        "test": "pest",
         "lint": [
-            "vendor/bin/pint"
+            "pint"
+        ],
+        "test:lint": [
+            "pint --test"
         ]
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     }
 }

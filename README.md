@@ -33,5 +33,25 @@ copilot --additional-mcp-config @.github/mcp-config.json
 
 If, after starting Copilot, `Configured MCP servers: laravel-boost` appears, the setup was successful.
 
+## Development
+
+### Running Tests
+
+```shell
+composer test
+```
+
+### Running Linter
+
+```shell
+composer lint
+```
+
+### Testing Linter Without Making Changes
+
+```shell
+composer test:lint
+```
+
 ## LICENCE
 MIT
