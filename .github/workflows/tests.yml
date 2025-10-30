@@ -35,7 +35,7 @@ jobs:
         run: composer install --prefer-dist --no-interaction --no-progress
 
       - name: Execute tests
-        run: composer test
+        run: composer test --coverage --coverage-clover build/logs/clover.xml
 
       - name: Execute linter
         run: composer test:lint
