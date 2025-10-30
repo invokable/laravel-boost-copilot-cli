@@ -49,6 +49,7 @@
     "minimum-stability": "stable",
     "scripts": {
         "test": "pest",
+        "test:coverage": "pest --coverage --coverage-clover build/logs/clover.xml",
         "lint": [
             "pint"
         ],
