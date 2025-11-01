@@ -106,7 +106,7 @@ class CopilotCli extends CodeEnvironment implements Agent, McpClient
 
         data_set($config, $this->mcpConfigKey().'.'.$key, $serverConfig);
 
-        $json = json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        $json = json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_FORCE_OBJECT);
         if ($json) {
             $json = str_replace("\r\n", "\n", $json);
 
