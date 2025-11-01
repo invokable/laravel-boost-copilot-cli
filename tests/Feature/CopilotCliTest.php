@@ -144,3 +144,51 @@ test('CopilotCli preserves existing MCP configuration when installing', function
         }
     }
 });
+
+test('CopilotCli converts empty headers array to object for JSON compatibility', function (): void {
+    $tempDir = sys_get_temp_dir().'/copilot-cli-test-'.uniqid();
+    mkdir($tempDir.'/.github', 0777, true);
+
+    try {
+        $configPath = $tempDir.'/.github/mcp-config.json';
+
+        // Create existing config with headers => []
+        $existingConfig = [
+            'mcpServers' => [
+                'existing-server' => [
+                    'type' => 'remote',
+                    'url' => 'https://example.com',
+                    'headers' => [],
+                ],
+            ],
+        ];
+        File::put($configPath, json_encode($existingConfig, JSON_PRETTY_PRINT));
+
+        $strategyFactory = Mockery::mock(DetectionStrategyFactory::class);
+        $copilotCli = new CopilotCli($strategyFactory);
+
+        $reflection = new ReflectionClass($copilotCli);
+        $method = $reflection->getMethod('installFileMcp');
+        $method->setAccessible(true);
+
+        $copilotCliMock = Mockery::mock(CopilotCli::class, [$strategyFactory])->makePartial();
+        $copilotCliMock->shouldReceive('mcpConfigPath')->andReturn($configPath);
+
+        $method->invoke($copilotCliMock, 'laravel-boost', 'php', ['artisan', 'boost:mcp']);
+
+        // Check raw JSON output
+        $jsonContent = File::get($configPath);
+
+        // Verify headers is an empty object {}, not an empty array []
+        expect($jsonContent)->toContain('"headers": {}')
+            ->and($jsonContent)->not->toContain('"headers": []');
+
+        // Verify the config is still valid
+        $config = json_decode($jsonContent, true);
+        expect($config['mcpServers'])->toHaveKeys(['existing-server', 'laravel-boost']);
+    } finally {
+        if (File::exists($tempDir)) {
+            File::deleteDirectory($tempDir);
+        }
+    }
+});
