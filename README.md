@@ -12,9 +12,9 @@
 - [Laravel Boost](https://github.com/laravel/boost) >= 1.6
 - [Copilot CLI](https://github.com/github/copilot-cli) >= 0.0.343
 
-## Support OS
+## Supported OS
 - macOS
-- WSL (Native Windows environment is not supported)
+- WSL (Native Windows is not supported, please use [laravel-boost-phpstorm-copilot](https://github.com/invokable/laravel-boost-phpstorm-copilot))
 - Linux
 
 ## Installation
@@ -25,7 +25,7 @@ composer require revolution/laravel-boost-copilot-cli --dev
 
 ## Usage
 
-When you run the standard Laravel Boost installation command within your Laravel project, you'll see a `GitHub Copilot CLI` item added to the list. Select it to generate `.github/copilot-instructions.md` and `.github/mcp-config.json` for Copilot CLI.
+When you run the Laravel Boost installation command within your Laravel project, you'll see a `GitHub Copilot CLI` item added to the list. Select it to generate `.github/mcp-config.json` for Copilot CLI. To generate `.github/copilot-instructions.md`, also select the boost standard `GitHub Copilot`.
 
 ```shell
 php artisan boost:install
@@ -43,26 +43,6 @@ From now on, always specify the `--additional-mcp-config` option when using the 
 
 ```shell
 copilot --additional-mcp-config @.github/mcp-config.json --resume
-```
-
-## Development
-
-### Running Tests
-
-```shell
-composer test
-```
-
-### Running Linter
-
-```shell
-composer lint
-```
-
-### Testing Linter Without Making Changes
-
-```shell
-composer test:lint
 ```
 
 ## LICENCE

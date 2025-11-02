@@ -9,11 +9,6 @@ use Laravel\Boost\Boost;
 
 class CopilotCliServiceProvider extends ServiceProvider
 {
-    public function register(): void
-    {
-        //
-    }
-
     public function boot(): void
     {
         Boost::registerCodeEnvironment('copilot-cli', CopilotCli::class);

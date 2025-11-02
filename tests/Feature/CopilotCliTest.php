@@ -20,13 +20,6 @@ test('CopilotCli returns correct display name', function (): void {
     expect($copilotCli->displayName())->toBe('GitHub Copilot CLI');
 });
 
-test('CopilotCli returns correct guidelines path', function (): void {
-    $strategyFactory = Mockery::mock(DetectionStrategyFactory::class);
-    $copilotCli = new CopilotCli($strategyFactory);
-
-    expect($copilotCli->guidelinesPath())->toBe('.github/copilot-instructions.md');
-});
-
 test('CopilotCli returns correct MCP config path', function (): void {
     $strategyFactory = Mockery::mock(DetectionStrategyFactory::class);
     $copilotCli = new CopilotCli($strategyFactory);
