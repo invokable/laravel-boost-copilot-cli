@@ -44,6 +44,9 @@ From now on, always specify the `--additional-mcp-config` option when using the 
 ```shell
 copilot --additional-mcp-config @.github/mcp-config.json --resume
 ```
+```shell
+copilot --additional-mcp-config @.github/mcp-config.json --continue
+```
 
-## LICENCE
+## License
 MIT
