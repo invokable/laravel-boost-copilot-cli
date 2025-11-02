@@ -123,7 +123,7 @@ This is a Laravel package that provides custom CodeEnvironment integration for G
 2. **PHP Version**: Minimum PHP 8.3
 3. **Laravel Version**: Minimum Laravel 12.x
 4. **File Structure**: Keep configuration files in `.github/` directory
-5. **MCP Strategy**: Always use FILE strategy, not REGISTRY
+5. **MCP Strategy**: Always use FILE strategy
 
 ## Common Tasks
 
