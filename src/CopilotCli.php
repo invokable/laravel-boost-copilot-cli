@@ -106,7 +106,9 @@ class CopilotCli extends CodeEnvironment implements Agent, McpClient
 
         data_set($config, $this->mcpConfigKey().'.'.$key, $serverConfig);
 
-        $json = json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_FORCE_OBJECT);
+        // Remove empty arrays from existing config to avoid compatibility issues
+        $config = $this->removeEmptyArrays($config);
+        $json = json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
         if ($json) {
             $json = str_replace("\r\n", "\n", $json);
 
@@ -114,5 +116,24 @@ class CopilotCli extends CodeEnvironment implements Agent, McpClient
         }
 
         return false;
+    }
+
+    /**
+     * Recursively remove empty arrays from config to avoid compatibility issues.
+     * Some MCP tools fail when encountering empty arrays (e.g., "headers": []).
+     */
+    protected function removeEmptyArrays(array $data): array
+    {
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                if (empty($value)) {
+                    unset($data[$key]);
+                } else {
+                    $data[$key] = $this->removeEmptyArrays($value);
+                }
+            }
+        }
+
+        return $data;
     }
 }
