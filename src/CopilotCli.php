@@ -29,7 +29,7 @@ class CopilotCli extends CodeEnvironment implements McpClient
     public function systemDetectionConfig(Platform $platform): array
     {
         return [
-            'command' => 'which copilot',
+            'command' => 'command -v copilot',
         ];
     }
 

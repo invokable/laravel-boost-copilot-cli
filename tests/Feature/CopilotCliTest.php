@@ -27,14 +27,14 @@ test('CopilotCli returns correct MCP config path', function (): void {
     expect($copilotCli->mcpConfigPath())->toBe('.github/mcp-config.json');
 });
 
-test('CopilotCli system detection config uses which command', function (): void {
+test('CopilotCli system detection config uses "command -v" command', function (): void {
     $strategyFactory = Mockery::mock(DetectionStrategyFactory::class);
     $copilotCli = new CopilotCli($strategyFactory);
 
     $config = $copilotCli->systemDetectionConfig(\Laravel\Boost\Install\Enums\Platform::Darwin);
 
     expect($config)->toHaveKey('command')
-        ->and($config['command'])->toBe('which copilot');
+        ->and($config['command'])->toBe('command -v copilot');
 });
 
 test('CopilotCli project detection config checks for copilot-instructions.md', function (): void {
