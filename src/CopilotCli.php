@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Revolution\Laravel\Boost;
 
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use Laravel\Boost\Contracts\McpClient;
 use Laravel\Boost\Install\CodeEnvironment\CodeEnvironment;
 use Laravel\Boost\Install\Enums\Platform;
@@ -71,9 +72,9 @@ class CopilotCli extends CodeEnvironment implements McpClient
             $config = json_decode($existingContent, true) ?? [];
         }
 
-        $php_path = match ($command) {
+        $php_path = match (Str::afterLast($command, '/')) {
             'wsl' => 'php',
-            './vendor/bin/sail' => './vendor/bin/sail',
+            'sail' => './vendor/bin/sail',
             default => $command,
         };
 
