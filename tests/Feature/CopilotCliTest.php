@@ -139,126 +139,25 @@ test('CopilotCli preserves existing MCP configuration when installing', function
 });
 
 test('CopilotCli converts wsl command to php', function (): void {
-    $tempDir = sys_get_temp_dir().'/copilot-cli-test-'.uniqid();
-    mkdir($tempDir.'/.github', 0777, true);
+    $strategyFactory = Mockery::mock(DetectionStrategyFactory::class);
+    $copilotCli = new CopilotCli($strategyFactory);
 
-    try {
-        $configPath = $tempDir.'/.github/mcp-config.json';
-
-        $strategyFactory = Mockery::mock(DetectionStrategyFactory::class);
-        $copilotCli = new CopilotCli($strategyFactory);
-
-        $reflection = new ReflectionClass($copilotCli);
-        $method = $reflection->getMethod('installFileMcp');
-        $method->setAccessible(true);
-
-        $copilotCliMock = Mockery::mock(CopilotCli::class, [$strategyFactory])->makePartial();
-        $copilotCliMock->shouldReceive('mcpConfigPath')->andReturn($configPath);
-
-        $result = $method->invoke($copilotCliMock, 'laravel-boost', 'wsl', ['artisan', 'boost:mcp']);
-
-        expect($result)->toBeTrue();
-
-        $config = json_decode(File::get($configPath), true);
-
-        expect($config['mcpServers']['laravel-boost']['command'])->toBe('php');
-    } finally {
-        if (File::exists($tempDir)) {
-            File::deleteDirectory($tempDir);
-        }
-    }
+    expect($copilotCli->convertCommandToPhpPath('wsl'))->toBe('php')
+        ->and($copilotCli->convertCommandToPhpPath('/usr/bin/wsl'))->toBe('php');
 });
 
-test('CopilotCli converts relative sail path to vendor/bin/sail', function (): void {
-    $tempDir = sys_get_temp_dir().'/copilot-cli-test-'.uniqid();
-    mkdir($tempDir.'/.github', 0777, true);
+test('CopilotCli converts sail command to vendor/bin/sail', function (): void {
+    $strategyFactory = Mockery::mock(DetectionStrategyFactory::class);
+    $copilotCli = new CopilotCli($strategyFactory);
 
-    try {
-        $configPath = $tempDir.'/.github/mcp-config.json';
-
-        $strategyFactory = Mockery::mock(DetectionStrategyFactory::class);
-        $copilotCli = new CopilotCli($strategyFactory);
-
-        $reflection = new ReflectionClass($copilotCli);
-        $method = $reflection->getMethod('installFileMcp');
-        $method->setAccessible(true);
-
-        $copilotCliMock = Mockery::mock(CopilotCli::class, [$strategyFactory])->makePartial();
-        $copilotCliMock->shouldReceive('mcpConfigPath')->andReturn($configPath);
-
-        $result = $method->invoke($copilotCliMock, 'laravel-boost', './vendor/bin/sail', ['artisan', 'boost:mcp']);
-
-        expect($result)->toBeTrue();
-
-        $config = json_decode(File::get($configPath), true);
-
-        expect($config['mcpServers']['laravel-boost']['command'])->toBe('./vendor/bin/sail');
-    } finally {
-        if (File::exists($tempDir)) {
-            File::deleteDirectory($tempDir);
-        }
-    }
-});
-
-test('CopilotCli converts absolute sail path to vendor/bin/sail', function (): void {
-    $tempDir = sys_get_temp_dir().'/copilot-cli-test-'.uniqid();
-    mkdir($tempDir.'/.github', 0777, true);
-
-    try {
-        $configPath = $tempDir.'/.github/mcp-config.json';
-
-        $strategyFactory = Mockery::mock(DetectionStrategyFactory::class);
-        $copilotCli = new CopilotCli($strategyFactory);
-
-        $reflection = new ReflectionClass($copilotCli);
-        $method = $reflection->getMethod('installFileMcp');
-        $method->setAccessible(true);
-
-        $copilotCliMock = Mockery::mock(CopilotCli::class, [$strategyFactory])->makePartial();
-        $copilotCliMock->shouldReceive('mcpConfigPath')->andReturn($configPath);
-
-        $result = $method->invoke($copilotCliMock, 'laravel-boost', '/home/user/project/vendor/bin/sail', ['artisan', 'boost:mcp']);
-
-        expect($result)->toBeTrue();
-
-        $config = json_decode(File::get($configPath), true);
-
-        expect($config['mcpServers']['laravel-boost']['command'])->toBe('./vendor/bin/sail');
-    } finally {
-        if (File::exists($tempDir)) {
-            File::deleteDirectory($tempDir);
-        }
-    }
+    expect($copilotCli->convertCommandToPhpPath('./vendor/bin/sail'))->toBe('./vendor/bin/sail')
+        ->and($copilotCli->convertCommandToPhpPath('/home/user/project/vendor/bin/sail'))->toBe('./vendor/bin/sail');
 });
 
 test('CopilotCli uses other commands as-is', function (): void {
-    $tempDir = sys_get_temp_dir().'/copilot-cli-test-'.uniqid();
-    mkdir($tempDir.'/.github', 0777, true);
+    $strategyFactory = Mockery::mock(DetectionStrategyFactory::class);
+    $copilotCli = new CopilotCli($strategyFactory);
 
-    try {
-        $configPath = $tempDir.'/.github/mcp-config.json';
-
-        $strategyFactory = Mockery::mock(DetectionStrategyFactory::class);
-        $copilotCli = new CopilotCli($strategyFactory);
-
-        $reflection = new ReflectionClass($copilotCli);
-        $method = $reflection->getMethod('installFileMcp');
-        $method->setAccessible(true);
-
-        $copilotCliMock = Mockery::mock(CopilotCli::class, [$strategyFactory])->makePartial();
-        $copilotCliMock->shouldReceive('mcpConfigPath')->andReturn($configPath);
-
-        // Test with a custom command
-        $result = $method->invoke($copilotCliMock, 'laravel-boost', '/usr/bin/php8.3', ['artisan', 'boost:mcp']);
-
-        expect($result)->toBeTrue();
-
-        $config = json_decode(File::get($configPath), true);
-
-        expect($config['mcpServers']['laravel-boost']['command'])->toBe('/usr/bin/php8.3');
-    } finally {
-        if (File::exists($tempDir)) {
-            File::deleteDirectory($tempDir);
-        }
-    }
+    expect($copilotCli->convertCommandToPhpPath('/usr/bin/php8.3'))->toBe('/usr/bin/php8.3')
+        ->and($copilotCli->convertCommandToPhpPath('php'))->toBe('php');
 });

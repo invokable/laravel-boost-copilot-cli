@@ -52,6 +52,18 @@ class CopilotCli extends CodeEnvironment implements McpClient
     }
 
     /**
+     * Convert command to appropriate PHP path for MCP configuration.
+     */
+    public function convertCommandToPhpPath(string $command): string
+    {
+        return match (Str::afterLast($command, '/')) {
+            'wsl' => 'php',
+            'sail' => './vendor/bin/sail',
+            default => $command,
+        };
+    }
+
+    /**
      * Install MCP server with GitHub Copilot CLI specific configuration.
      *
      * @param  array<int, string>  $args
@@ -72,17 +84,13 @@ class CopilotCli extends CodeEnvironment implements McpClient
             $config = json_decode($existingContent, true) ?? [];
         }
 
-        $php_path = match (Str::afterLast($command, '/')) {
-            'wsl' => 'php',
-            'sail' => './vendor/bin/sail',
-            default => $command,
-        };
+        $phpPath = $this->convertCommandToPhpPath($command);
 
         // Build server configuration with type and tools fields
         // Use fixed values for GitHub Copilot CLI
         $serverConfig = [
             'type' => 'local',
-            'command' => $php_path,
+            'command' => $phpPath,
             'args' => [
                 'artisan',
                 'boost:mcp',
