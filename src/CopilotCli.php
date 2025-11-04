@@ -71,11 +71,17 @@ class CopilotCli extends CodeEnvironment implements McpClient
             $config = json_decode($existingContent, true) ?? [];
         }
 
+        $php_path = match ($command) {
+            'wsl' => 'php',
+            './vendor/bin/sail' => './vendor/bin/sail',
+            default => $command,
+        };
+
         // Build server configuration with type and tools fields
         // Use fixed values for GitHub Copilot CLI
         $serverConfig = [
             'type' => 'local',
-            'command' => 'php',
+            'command' => $php_path,
             'args' => [
                 'artisan',
                 'boost:mcp',
