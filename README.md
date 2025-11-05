@@ -17,6 +17,8 @@
 - WSL (Native Windows is not supported, please use [laravel-boost-phpstorm-copilot](https://github.com/invokable/laravel-boost-phpstorm-copilot))
 - Linux
 
+> **Note**: It also supports Laravel Sail. Before use, start it with `vendor/bin/sail up -d`.
+
 ## Installation
 
 ```shell
