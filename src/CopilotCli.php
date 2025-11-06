@@ -61,7 +61,7 @@ class CopilotCli extends CodeEnvironment implements McpClient
         }
 
         return match (Str::afterLast($command, '/')) {
-            'wsl' => 'php',
+            'wsl', 'wsl.exe' => 'php',
             'sail' => './vendor/bin/sail',
             default => $command,
         };
