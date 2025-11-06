@@ -143,6 +143,7 @@ test('CopilotCli converts wsl command to php', function (): void {
     $copilotCli = new CopilotCli($strategyFactory);
 
     expect($copilotCli->convertCommandToPhpPath('wsl'))->toBe('php')
+        ->and($copilotCli->convertCommandToPhpPath('wsl.exe'))->toBe('php')
         ->and($copilotCli->convertCommandToPhpPath('/usr/bin/wsl'))->toBe('php');
 });
 
