@@ -1,0 +1,9 @@
+{
+    "agents": [
+        "copilot"
+    ],
+    "editors": [
+        "copilot-cli"
+    ],
+    "guidelines": []
+}
