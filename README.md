@@ -21,7 +21,7 @@
 
 ### Laravel Sail
 
-It also supports Laravel Sail. Before use, start it with `vendor/bin/sail up -d`.
+It also supports Laravel Sail. Before use, start it with `vendor/bin/sail up -d`. The `copilot` command runs outside of Sail.
 
 ### Testbench for Package Developers
 
