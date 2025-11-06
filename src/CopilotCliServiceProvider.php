@@ -23,7 +23,7 @@ class CopilotCliServiceProvider extends ServiceProvider
             }
 
             if (in_array($event->command, ['boost:install', 'boost:update'], true)) {
-                $this->app->setBasePath(realpath(__DIR__.'/..'));
+                $this->app->setBasePath(realpath(getcwd()));
                 $this->app->useStoragePath(default_skeleton_path('storage'));
                 $this->app->useAppPath(default_skeleton_path('app'));
             }
