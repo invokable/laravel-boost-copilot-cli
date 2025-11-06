@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Revolution\Laravel\Boost;
 
 use Illuminate\Console\Events\CommandStarting;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Boost\Boost;
-use Illuminate\Support\Facades\Event;
 
 use function Orchestra\Testbench\default_skeleton_path;
 
