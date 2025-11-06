@@ -116,6 +116,43 @@ This is a Laravel package that provides custom CodeEnvironment integration for G
 }
 ```
 
+#### Laravel Sail
+```json
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "type": "local",
+            "command": "./vendor/bin/sail",
+            "args": [
+                "artisan",
+                "boost:mcp"
+            ],
+            "tools": [
+                "*"
+            ]
+        }
+    }
+}
+```
+
+#### Testbench
+```json
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "type": "local",
+            "command": "./vendor/bin/testbench",
+            "args": [
+                "boost:mcp"
+            ],
+            "tools": [
+                "*"
+            ]
+        }
+    }
+}
+```
+
 ## Important Constraints
 
 1. **Platform Support**: Do NOT add Windows native support (only WSL on Windows)
