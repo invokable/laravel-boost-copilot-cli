@@ -1,6 +1,7 @@
 laravel: '@testbench'
 
 env:
+  # Required for Laravel Boost to function properly
   CACHE_STORE: file
 
 providers:

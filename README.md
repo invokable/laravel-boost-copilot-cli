@@ -22,6 +22,52 @@ It also supports Laravel Sail. Before use, start it with `vendor/bin/sail up -d`
 
 ### Testbench for Package Developers
 
+When developing Laravel packages, you can use Laravel Boost with Testbench to test your package integration.
+
+> **Note:** When using Testbench for package development, the environment differs from a regular Laravel project. Some MCP tools that depend on application-specific features (like database connections, specific models, or application routes) may not be available or may not work as expected in the Testbench environment.
+
+#### Setup
+
+First, ensure your `testbench.yaml` includes the following configuration:
+
+```yaml
+env:
+  CACHE_STORE: file
+```
+
+This is **important** because Laravel Boost requires a cache store to function properly.
+
+#### Installation
+
+Run the boost installation command using Testbench:
+
+```shell
+vendor/bin/testbench boost:install
+```
+
+This will generate `.github/mcp-config.json` configured for Testbench environment with the following settings:
+
+```json
+{
+  "mcpServers": {
+    "laravel-boost": {
+      "type": "local",
+      "command": "./vendor/bin/testbench",
+      "args": ["boost:mcp"],
+      "tools": ["*"]
+    }
+  }
+}
+```
+
+#### Usage
+
+Use Copilot CLI with the generated config:
+
+```shell
+copilot --additional-mcp-config @.github/mcp-config.json
+```
+
 
 
 ## Installation
