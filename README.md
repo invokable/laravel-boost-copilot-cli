@@ -12,12 +12,17 @@
 - [Laravel Boost](https://github.com/laravel/boost) >= 1.7
 - [Copilot CLI](https://github.com/github/copilot-cli) >= 0.0.343
 
-## Supported OS
+## Supported Platforms
 - macOS
 - WSL (Native Windows is not supported, please use [laravel-boost-phpstorm-copilot](https://github.com/invokable/laravel-boost-phpstorm-copilot))
 - Linux
 
-> **Note**: It also supports Laravel Sail. Before use, start it with `vendor/bin/sail up -d`.
+### Laravel Sail
+It also supports Laravel Sail. Before use, start it with `vendor/bin/sail up -d`.
+
+### Testbench for Package Developers
+
+
 
 ## Installation
 

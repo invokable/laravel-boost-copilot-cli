@@ -56,6 +56,10 @@ class CopilotCli extends CodeEnvironment implements McpClient
      */
     public function convertCommandToPhpPath(string $command): string
     {
+        if ($this->isRunningInTestbench()) {
+            return './vendor/bin/testbench';
+        }
+
         return match (Str::afterLast($command, '/')) {
             'wsl' => 'php',
             'sail' => './vendor/bin/sail',
@@ -87,14 +91,13 @@ class CopilotCli extends CodeEnvironment implements McpClient
         $phpPath = $this->convertCommandToPhpPath($command);
 
         // Build server configuration with type and tools fields
-        // Use fixed values for GitHub Copilot CLI
         $serverConfig = [
             'type' => 'local',
             'command' => $phpPath,
-            'args' => [
-                'artisan',
+            'args' => array_values(array_filter([
+                ! $this->isRunningInTestbench() ? 'artisan' : false,
                 'boost:mcp',
-            ],
+            ])),
             'tools' => ['*'],
         ];
 
@@ -133,5 +136,10 @@ class CopilotCli extends CodeEnvironment implements McpClient
         }
 
         return $data;
+    }
+
+    protected function isRunningInTestbench(): bool
+    {
+        return defined('TESTBENCH_CORE');
     }
 }
