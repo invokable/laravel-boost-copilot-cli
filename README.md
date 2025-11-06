@@ -7,22 +7,26 @@
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/invokable/laravel-boost-copilot-cli)
 
 ## Requirements
+
 - PHP >= 8.3
 - Laravel >= 12.x
 - [Laravel Boost](https://github.com/laravel/boost) >= 1.7
 - [Copilot CLI](https://github.com/github/copilot-cli) >= 0.0.343
 
 ## Supported Platforms
+
 - macOS
 - WSL (Native Windows is not supported, please use [laravel-boost-phpstorm-copilot](https://github.com/invokable/laravel-boost-phpstorm-copilot))
 - Linux
 
 ### Laravel Sail
+
 It also supports Laravel Sail. Before use, start it with `vendor/bin/sail up -d`.
 
 ### Testbench for Package Developers
 
-When developing Laravel packages, you can use Laravel Boost with Testbench to test your package integration.
+<details>
+<summary>When developing Laravel packages, you can use Laravel Boost with Testbench to test your package integration.</summary>
 
 > **Note:** When using Testbench for package development, the environment differs from a regular Laravel project. Some MCP tools that depend on application-specific features (like database connections, specific models, or application routes) may not be available or may not work as expected in the Testbench environment.
 
@@ -49,14 +53,18 @@ This will generate `.github/mcp-config.json` configured for Testbench environmen
 
 ```json
 {
-  "mcpServers": {
-    "laravel-boost": {
-      "type": "local",
-      "command": "./vendor/bin/testbench",
-      "args": ["boost:mcp"],
-      "tools": ["*"]
+    "mcpServers": {
+        "laravel-boost": {
+            "type": "local",
+            "command": "./vendor/bin/testbench",
+            "args": [
+                "boost:mcp"
+            ],
+            "tools": [
+                "*"
+            ]
+        }
     }
-  }
 }
 ```
 
@@ -68,7 +76,7 @@ Use Copilot CLI with the generated config:
 copilot --additional-mcp-config @.github/mcp-config.json
 ```
 
-
+</details>
 
 ## Installation
 
@@ -97,9 +105,11 @@ From now on, always specify the `--additional-mcp-config` option when using the 
 ```shell
 copilot --additional-mcp-config @.github/mcp-config.json --resume
 ```
+
 ```shell
 copilot --additional-mcp-config @.github/mcp-config.json --continue
 ```
 
 ## License
+
 MIT
