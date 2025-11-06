@@ -26,7 +26,7 @@ It also supports Laravel Sail. Before use, start it with `vendor/bin/sail up -d`
 ### Testbench for Package Developers
 
 <details>
-<summary>When developing Laravel packages, you can use Laravel Boost with Testbench to test your package integration.</summary>
+<summary>When developing Laravel packages, you can use Laravel Boost with Testbench.</summary>
 
 > **Note:** When using Testbench for package development, the environment differs from a regular Laravel project. Some MCP tools that depend on application-specific features (like database connections, specific models, or application routes) may not be available or may not work as expected in the Testbench environment.
 
