@@ -229,6 +229,13 @@ composer lint          # Format code with Pint
 composer test:lint     # Check code formatting
 ```
 
+## AI Guidelines template
+
+- `resources/boost/guidelines/core.blade.php` is used as a third-party AI guideline when users of this package run `php artisan boost:install`.
+- `.ai/guidelines/copilot-cli.blade.php` is for the development of this package itself. It is added to the guidelines by `vendor/bin/testbench boost:install`.
+- The contents are the same, so they are automatically copied using `.github/workflows/copy-guideline.yml`
+- No need to modify `copilot-cli.blade.php`.
+
 ## Release Notes
 
 When preparing releases, ensure:
