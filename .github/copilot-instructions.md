@@ -103,6 +103,10 @@ This is a Laravel package that provides custom CodeEnvironment integration for G
 - Uses `McpInstallationStrategy::FILE` for config file generation
 
 ### MCP Configuration Format
+
+`type` and `tools` are required.
+
+#### Normal Laravel Application
 ```json
 {
   "mcpServers": {
