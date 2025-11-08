@@ -19,4 +19,3 @@
 - Focus on package-specific development tasks: writing tests, implementing package features, and ensuring compatibility with Laravel.
 - Use `vendor/bin/testbench` commands instead of `php artisan` when needed.
 @endif
-
