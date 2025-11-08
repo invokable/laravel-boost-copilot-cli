@@ -544,9 +544,9 @@ $pages->assertNoJavascriptErrors()->assertNoConsoleLogs();
 - This is a **Laravel package development project** using Orchestra Testbench, not a standard Laravel application.
 - The environment differs significantly from a typical Laravel project - there is no full application context, database, or application-specific models.
 - **Important:** Not all Laravel Boost MCP tools will work correctly in this environment:
-    - Tools that depend on database connections, specific models, application routes, or other application-specific features may not be available or may fail.
-    - Tools like `database-query`, `database-schema`, `list-routes` may return limited or no results.
-    - Basic tools like `application-info`, `list-artisan-commands`, `search-docs` should work normally.
+  - Tools that depend on database connections, specific models, application routes, or other application-specific features may not be available or may fail.
+  - Tools like `database-query`, `database-schema`, `list-routes` may return limited or no results.
+  - Basic tools like `application-info`, `list-artisan-commands`, `search-docs` should work normally.
 - Focus on package-specific development tasks: writing tests, implementing package features, and ensuring compatibility with Laravel.
 - Use `vendor/bin/testbench` commands instead of `php artisan` when needed.
 </laravel-boost-guidelines>
