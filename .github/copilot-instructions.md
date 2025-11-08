@@ -526,9 +526,9 @@ $pages = visit(['/', '/about', '/contact']);
 
 $pages->assertNoJavascriptErrors()->assertNoConsoleLogs();
 </code-snippet>
-</laravel-boost-guidelines>
 
-=== revolution/laravel-boost-copilot-cli rules ===
+
+=== .ai/copilot-cli rules ===
 
 ## Laravel Boost for GitHub Copilot CLI
 
@@ -549,3 +549,4 @@ $pages->assertNoJavascriptErrors()->assertNoConsoleLogs();
     - Basic tools like `application-info`, `list-artisan-commands`, `search-docs` should work normally.
 - Focus on package-specific development tasks: writing tests, implementing package features, and ensuring compatibility with Laravel.
 - Use `vendor/bin/testbench` commands instead of `php artisan` when needed.
+</laravel-boost-guidelines>
