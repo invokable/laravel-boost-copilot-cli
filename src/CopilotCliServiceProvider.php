@@ -17,6 +17,7 @@ class CopilotCliServiceProvider extends ServiceProvider
     {
         Boost::registerCodeEnvironment('copilot-cli', CopilotCli::class);
 
+        // Fixed a path issue when running testbench
         Event::listen(function (CommandStarting $event) {
             if (! defined('TESTBENCH_CORE')) {
                 return;
@@ -26,6 +27,7 @@ class CopilotCliServiceProvider extends ServiceProvider
                 $this->app->setBasePath(getcwd());
                 $this->app->useStoragePath(default_skeleton_path('storage'));
                 $this->app->useAppPath(default_skeleton_path('app'));
+                // Add any necessary paths other than storage and app.
             }
         });
     }
