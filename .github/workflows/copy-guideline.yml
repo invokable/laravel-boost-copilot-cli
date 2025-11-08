@@ -3,6 +3,8 @@ name: Copy guideline
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'resources/boost/guidelines/core.blade.php'
 
 permissions:
   contents: write
