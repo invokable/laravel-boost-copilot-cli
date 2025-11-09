@@ -36,10 +36,10 @@ First, ensure your `testbench.yaml` includes the following configuration:
 
 ```yaml
 env:
-  CACHE_STORE: file
+  CACHE_STORE: array
 ```
 
-This is **important** because Laravel Boost requires a cache store to function properly.
+This is **important** because Laravel Boost tries to use a database cache store by default, which will not work properly.
 
 #### Installation
 
