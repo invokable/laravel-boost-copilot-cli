@@ -28,13 +28,16 @@ class CopilotCliServiceProvider extends ServiceProvider
     protected function testbench(): void
     {
         Event::listen(function (CommandStarting $event) {
-            if (in_array($event->command, ['boost:install', 'boost:update'], true)) {
-                $this->app->setBasePath(getcwd());
-
-                $this->app->useStoragePath(default_skeleton_path('storage'));
-                $this->app->useAppPath(default_skeleton_path('app'));
-                // Add any necessary paths other than storage and app.
+            if (! in_array($event->command, ['boost:install', 'boost:update'], true)) {
+                return;
             }
+
+            // Change the base path from the testbench skeleton to the current working directory.
+            $this->app->setBasePath(getcwd());
+
+            $this->app->useStoragePath(default_skeleton_path('storage'));
+            $this->app->useAppPath(default_skeleton_path('app'));
+            // Add any necessary paths other than storage and app.
         });
     }
 }
