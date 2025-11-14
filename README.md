@@ -110,6 +110,28 @@ copilot --additional-mcp-config @.github/mcp-config.json --resume
 copilot --additional-mcp-config @.github/mcp-config.json --continue
 ```
 
+### Autoloading `mcp-config.json`
+
+`.bashrc` or `.zshrc` can be modified to automatically load the `mcp-config.json` file if it exists in the current project.
+
+```shell
+copilot_mcp() {
+  if [ -f ".github/mcp-config.json" ]; then
+    copilot --additional-mcp-config @.github/mcp-config.json "$@"
+  else
+    copilot "$@"
+  fi
+}
+
+alias copilot=copilot_mcp
+```
+
+```shell
+copilot
+copilot --resume
+copilot --continue
+```
+
 ## License
 
 MIT
