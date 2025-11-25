@@ -116,11 +116,17 @@ copilot --additional-mcp-config @.github/mcp-config.json --continue
 
 ```shell
 copilot_mcp() {
+  local args=()
+
   if [ -f ".github/mcp-config.json" ]; then
-    copilot --additional-mcp-config @.github/mcp-config.json "$@"
-  else
-    copilot "$@"
+    args+=(--additional-mcp-config @.github/mcp-config.json)
   fi
+
+  if [ -f ".github/mcp-config.local.json" ]; then
+    args+=(--additional-mcp-config @.github/mcp-config.local.json)
+  fi
+
+  copilot "${args[@]}" "$@"
 }
 
 alias copilot=copilot_mcp
@@ -130,6 +136,31 @@ alias copilot=copilot_mcp
 copilot
 copilot --resume
 copilot --continue
+```
+
+### Local MCP Configuration
+
+For MCP servers that require sensitive credentials (like Authorization headers), create `.github/mcp-config.local.json` for local-only settings. Add it to `.gitignore` to keep credentials out of version control.
+
+```shell
+echo ".github/mcp-config.local.json" >> .gitignore
+```
+
+Example `.github/mcp-config.local.json`:
+
+```json
+{
+  "mcpServers": {
+    "remote-mcp": {
+      "type": "http",
+      "url": "https://example.com/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_TOKEN"
+      },
+      "tools": ["*"]
+    }
+  }
+}
 ```
 
 ## License
