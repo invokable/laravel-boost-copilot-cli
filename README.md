@@ -38,10 +38,11 @@ First, ensure your `testbench.yaml` includes the following configuration:
 ```yaml
 env:
   CACHE_STORE: array
-  APP_ENV: local
 ```
 
 This is **important** because Laravel Boost tries to use a database cache store by default, which will not work properly.
+
+If `APP_ENV` is also set, set it to `APP_ENV: local`.
 
 #### Installation
 
