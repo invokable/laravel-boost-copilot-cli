@@ -18,7 +18,7 @@ This is a Laravel package that provides custom CodeEnvironment integration for G
 ### Core Components
 
 1. **CopilotCli.php**: Main CodeEnvironment implementation
-   - Implements `McpClient` interfaces
+   - Implements `Agent` `McpClient` interfaces
    - Handles detection, configuration, and MCP installation
    - Generates `.github/mcp-config.json`
 
