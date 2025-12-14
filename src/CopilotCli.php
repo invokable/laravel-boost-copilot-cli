@@ -47,6 +47,11 @@ class CopilotCli extends CodeEnvironment implements Agent, McpClient
         ];
     }
 
+    /**
+     * Get the file path where AI guidelines should be written.
+     *
+     * @return string The relative or absolute path to the guideline file
+     */
     public function guidelinesPath(): string
     {
         return '.github/instructions/laravel-boost.instructions.md';
