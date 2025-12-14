@@ -206,6 +206,7 @@ test('CopilotCli installs MCP configuration with testbench settings when in test
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
         $copilotCliMock->shouldReceive('mcpConfigPath')->andReturn($configPath);
+        $copilotCliMock->shouldAllowMockingProtectedMethods();
         $copilotCliMock->shouldReceive('isRunningInTestbench')->andReturn(true);
 
         $reflection = new ReflectionClass($copilotCliMock);
@@ -249,6 +250,7 @@ test('CopilotCli removes "artisan" from args when running in testbench', functio
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
         $copilotCliMock->shouldReceive('mcpConfigPath')->andReturn($configPath);
+        $copilotCliMock->shouldAllowMockingProtectedMethods();
         $copilotCliMock->shouldReceive('isRunningInTestbench')->andReturn(true);
 
         $reflection = new ReflectionClass($copilotCliMock);
