@@ -171,6 +171,9 @@ Example `.github/mcp-config.local.json`:
 }
 ```
 
+## TODO
+- Migrate to Agent Skills when Laravel Boost supports it.
+
 ## License
 
 MIT
