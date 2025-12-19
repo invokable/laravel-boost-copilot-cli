@@ -99,6 +99,9 @@ class CopilotCli extends CodeEnvironment implements Agent, McpClient
      *
      * @param  array<int, string>  $args
      * @param  array<string, string>  $env
+     *
+     * @throws FileNotFoundException
+     * @throws JsonException
      */
     protected function installFileMcp(string $key, string $command, array $args = [], array $env = []): bool
     {
@@ -112,7 +115,7 @@ class CopilotCli extends CodeEnvironment implements Agent, McpClient
         $config = [];
         if (File::exists($path)) {
             $existingContent = File::get($path);
-            $config = json_decode($existingContent, true) ?? [];
+            $config = json_decode($existingContent, true, 512, JSON_THROW_ON_ERROR) ?? [];
         }
 
         $phpPath = $this->convertCommandToPhpPath($command);
@@ -136,7 +139,7 @@ class CopilotCli extends CodeEnvironment implements Agent, McpClient
 
         // Remove empty arrays from existing config to avoid compatibility issues
         $config = $this->removeEmptyArrays($config);
-        $json = json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        $json = json_encode($config, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
         if ($json) {
             $json = str_replace("\r\n", "\n", $json);
 
