@@ -91,7 +91,8 @@ composer require revolution/laravel-boost-copilot-cli --dev
 
 When you run the Laravel Boost installation command within your Laravel project, you'll see a `GitHub Copilot CLI` item added to the list. 
 
-Select `GitHub Copilot CLI` for both the editor and guidelines. This will create `.github/mcp-config.json` and `.github/instructions/laravel-boost.instructions.md`.
+- Select `GitHub Copilot CLI` for the editor. This will create `.github/mcp-config.json`.
+- Select `GitHub Copilot(Custom instructions)` for the guidelines. This will create `.github/instructions/laravel-boost.instructions.md`.
 
 If you want to create the regular `.github/copilot-instructions.md`, select `GitHub Copilot` for the guidelines.
 
