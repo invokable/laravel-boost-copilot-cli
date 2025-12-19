@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Revolution\Laravel\Boost;
 
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use JsonException;
 use Laravel\Boost\Contracts\Agent;
 use Laravel\Boost\Contracts\McpClient;
 use Laravel\Boost\Install\CodeEnvironment\CodeEnvironment;
@@ -30,9 +32,14 @@ class CopilotCli extends CodeEnvironment implements Agent, McpClient
      */
     public function systemDetectionConfig(Platform $platform): array
     {
-        return [
-            'command' => 'command -v copilot',
-        ];
+        return match ($platform) {
+            Platform::Darwin, Platform::Linux => [
+                'command' => 'command -v copilot',
+            ],
+            Platform::Windows => [
+                'command' => 'where copilot 2>nul',
+            ],
+        };
     }
 
     /**
@@ -43,7 +50,8 @@ class CopilotCli extends CodeEnvironment implements Agent, McpClient
     public function projectDetectionConfig(): array
     {
         return [
-            'files' => ['.github/copilot-instructions.md'],
+            'paths' => ['.github/instructions'],
+            'files' => ['.github/copilot-instructions.md', '.github/instructions/laravel-boost.instructions.md', 'AGENTS.md', 'CLAUDE.md', 'GEMINI.md'],
         ];
     }
 
