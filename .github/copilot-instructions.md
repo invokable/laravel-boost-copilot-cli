@@ -60,7 +60,7 @@ This is a Laravel package that provides custom CodeEnvironment integration for G
    - Use `File` facade for file operations
 
 3. **Configuration Files**:
-   - `.github/copilot-instructions.md`: AI guidelines path
+   - `.github/instructions/laravel-boost.instructions.md`: AI guidelines path
    - `.github/mcp-config.json`: MCP server configuration
 
 ### Testing Approach
