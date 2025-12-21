@@ -16,7 +16,9 @@
 ## Supported Platforms
 
 - macOS
-- WSL (Native Windows is not supported, please use [laravel-boost-phpstorm-copilot](https://github.com/invokable/laravel-boost-phpstorm-copilot))
+- WSL
+  - Native Windows is not supported, please use [laravel-boost-phpstorm-copilot](https://github.com/invokable/laravel-boost-phpstorm-copilot)
+  - If you manually create an MCP config file, you can use Laravel Boost without this package.
 - Linux
 
 ### Laravel Sail
