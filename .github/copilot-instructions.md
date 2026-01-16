@@ -27,18 +27,9 @@ composer run test:lint     # Check code formatting
 1. **CopilotCli.php**: Main CodeEnvironment implementation
    - Implements `Agent` `McpClient` interfaces
    - Handles detection, configuration, and MCP installation
-   - Generates `.github/mcp-config.json`
 
 2. **CopilotCliServiceProvider.php**: Laravel service provider
    - Registers the CopilotCli CodeEnvironment with Laravel Boost
-   - Auto-discovered via Laravel's package discovery
-
-### Key Features
-
-- System-wide and project-specific detection
-- MCP server configuration for Copilot CLI
-- File-based MCP installation strategy
-- Integration with `php artisan boost:install` command
 
 ### Configuration Files
 - `.github/instructions/laravel-boost.instructions.md`: AI guidelines path
