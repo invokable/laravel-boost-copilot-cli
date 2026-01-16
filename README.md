@@ -8,7 +8,7 @@
 
 ## Requirements
 
-- PHP >= 8.3
+- PHP >= 8.2
 - Laravel >= 12.x
 - [Laravel Boost](https://github.com/laravel/boost) >= 1.7
 - [Copilot CLI](https://github.com/github/copilot-cli) >= 0.0.343
