@@ -108,7 +108,7 @@ class CopilotCli extends CodeEnvironment implements Agent, McpClient
         };
     }
 
-    protected function isRunningInTestbench(): bool
+    public function isRunningInTestbench(): bool
     {
         if (static::$fake) {
             return true;
