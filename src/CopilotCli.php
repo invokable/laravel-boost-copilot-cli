@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Revolution\Laravel\Boost;
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Laravel\Boost\Contracts\Agent;
 use Laravel\Boost\Contracts\McpClient;
@@ -71,6 +70,30 @@ class CopilotCli extends CodeEnvironment implements Agent, McpClient
     }
 
     /**
+     * Build the MCP server configuration payload for file-based installation.
+     *
+     * @param  array<int, string>  $args
+     * @param  array<string, string>  $env
+     * @return array<string, mixed>
+     */
+    public function mcpServerConfig(string $command, array $args = [], array $env = []): array
+    {
+        // Build server configuration with type and tools fields
+        $config = [
+            'type' => 'local',
+            'command' => $this->convertCommandToPhpPath($command),
+            'args' => array_values(array_filter([
+                ! $this->isRunningInTestbench() ? 'artisan' : false,
+                'boost:mcp',
+            ])),
+            'env' => $env,
+            'tools' => ['*'],
+        ];
+
+        return $this->removeEmptyArrays($config);
+    }
+
+    /**
      * Convert command to appropriate PHP path for MCP configuration.
      */
     public function convertCommandToPhpPath(string $command): string
@@ -84,58 +107,6 @@ class CopilotCli extends CodeEnvironment implements Agent, McpClient
             'sail' => './vendor/bin/sail',
             default => $command,
         };
-    }
-
-    /**
-     * Install MCP server with GitHub Copilot CLI specific configuration.
-     *
-     * @param  array<int, string>  $args
-     * @param  array<string, string>  $env
-     */
-    protected function installFileMcp(string $key, string $command, array $args = [], array $env = []): bool
-    {
-        $path = $this->mcpConfigPath();
-        if (! $path) {
-            return false;
-        }
-
-        File::ensureDirectoryExists(dirname($path));
-
-        $config = [];
-        if (File::exists($path)) {
-            $existingContent = File::get($path);
-            $config = json_decode($existingContent, true) ?? [];
-        }
-
-        $phpPath = $this->convertCommandToPhpPath($command);
-
-        // Build server configuration with type and tools fields
-        $serverConfig = [
-            'type' => 'local',
-            'command' => $phpPath,
-            'args' => array_values(array_filter([
-                ! $this->isRunningInTestbench() ? 'artisan' : false,
-                'boost:mcp',
-            ])),
-            'tools' => ['*'],
-        ];
-
-        if (! empty($env)) {
-            $serverConfig['env'] = $env;
-        }
-
-        data_set($config, $this->mcpConfigKey().'.'.$key, $serverConfig);
-
-        // Remove empty arrays from existing config to avoid compatibility issues
-        $config = $this->removeEmptyArrays($config);
-        $json = json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-        if ($json) {
-            $json = str_replace("\r\n", "\n", $json);
-
-            return File::put($path, $json) !== false;
-        }
-
-        return false;
     }
 
     /**
