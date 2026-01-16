@@ -12,6 +12,8 @@ use Laravel\Boost\Install\Enums\Platform;
 
 class CopilotCli extends CodeEnvironment implements Agent, McpClient
 {
+    protected static bool $fake = false;
+
     public function name(): string
     {
         return 'copilot-cli';
@@ -108,6 +110,18 @@ class CopilotCli extends CodeEnvironment implements Agent, McpClient
 
     protected function isRunningInTestbench(): bool
     {
+        if (static::$fake) {
+            return true;
+        }
+
         return defined('TESTBENCH_CORE');
+    }
+
+    /**
+     * Indicates if the Copilot CLI is being faked testbench for testing purposes.
+     */
+    public static function fake(bool $fake = true): void
+    {
+        static::$fake = $fake;
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\File;
+use Revolution\Laravel\Boost\CopilotCli;
 
 test('guidelines file exists', function (): void {
     $guidelinePath = __DIR__.'/../../resources/boost/guidelines/core.blade.php';
@@ -66,4 +67,4 @@ test('guidelines render correctly with testbench', function (): void {
         ->and($rendered)->toContain('Not all Laravel Boost MCP tools will work correctly')
         ->and($rendered)->not->toContain('@if')
         ->and($rendered)->not->toContain('@endif');
-})->skip('TESTBENCH_CORE constant cannot be conditionally defined in same process');
+});

@@ -178,10 +178,7 @@ test('CopilotCli detects testbench environment when TESTBENCH_CORE is defined', 
 });
 
 test('CopilotCli converts command to testbench when TESTBENCH_CORE is defined', function (): void {
-    // Define the constant temporarily to simulate testbench environment
-    if (! defined('TESTBENCH_CORE')) {
-        define('TESTBENCH_CORE', true);
-    }
+    CopilotCli::fake();
 
     $strategyFactory = Mockery::mock(DetectionStrategyFactory::class);
     $copilotCli = new CopilotCli($strategyFactory);
@@ -190,7 +187,7 @@ test('CopilotCli converts command to testbench when TESTBENCH_CORE is defined', 
     expect($copilotCli->convertCommandToPhpPath('php'))->toBe('./vendor/bin/testbench')
         ->and($copilotCli->convertCommandToPhpPath('wsl'))->toBe('./vendor/bin/testbench')
         ->and($copilotCli->convertCommandToPhpPath('./vendor/bin/sail'))->toBe('./vendor/bin/testbench');
-})->skip('TESTBENCH_CORE constant cannot be conditionally defined in same process');
+});
 
 test('CopilotCli installs MCP configuration with testbench settings when in testbench', function (): void {
     $tempDir = sys_get_temp_dir().'/copilot-cli-test-'.uniqid();
