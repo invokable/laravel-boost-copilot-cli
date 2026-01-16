@@ -6,9 +6,9 @@ This is a Laravel package that provides custom CodeEnvironment integration for G
 
 ## Technology Stack
 
-- **Language**: PHP 8.3+
+- **Language**: PHP 8.2+
 - **Framework**: Laravel 12.x+
-- **Dependencies**: Laravel Boost 1.7+
+- **Dependencies**: Laravel Boost 1.8+
 - **Target Platforms**: macOS, WSL, Linux (Native Windows not supported)
 - **Testing**: Pest PHP 4.x
 - **Code Quality**: Laravel Pint (PSR-12)
@@ -40,35 +40,9 @@ composer run test:lint     # Check code formatting
 - File-based MCP installation strategy
 - Integration with `php artisan boost:install` command
 
-## Code Style Guidelines
-
-### PHP Standards
-- Follow PSR-12 coding standards (enforced by Laravel Pint)
-- Use strict types declaration (`declare(strict_types=1);`)
-- Use return type declarations for all methods
-- Follow Laravel conventions and best practices
-- Run `composer lint` before committing
-- Verify formatting with `composer test:lint`
-
-### Namespace Convention
-- Root namespace: `Revolution\Laravel\Boost`
-- Follow PSR-4 autoloading standards
-- Test namespace: `Tests\`
-
-## Development Guidelines
-
-### When Making Changes
-
-1. **Service Provider**: Only modify for registration logic
-2. **CopilotCli Class**: 
-   - Keep detection configs simple and reliable
-   - Maintain compatibility with Laravel Boost interfaces
-   - Ensure JSON configuration format is valid
-   - Use `File` facade for file operations
-
-3. **Configuration Files**:
-   - `.github/instructions/laravel-boost.instructions.md`: AI guidelines path
-   - `.github/mcp-config.json`: MCP server configuration
+### Configuration Files
+- `.github/instructions/laravel-boost.instructions.md`: AI guidelines path
+- `.github/mcp-config.json`: MCP server configuration
 
 ## MCP Configuration Format
 
