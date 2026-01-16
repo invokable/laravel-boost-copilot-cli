@@ -94,17 +94,13 @@ test('CopilotCli uses other commands as-is', function (): void {
 });
 
 test('CopilotCli detects testbench environment when TESTBENCH_CORE is defined', function (): void {
+    CopilotCli::fake();
+
     $strategyFactory = Mockery::mock(DetectionStrategyFactory::class);
     $copilotCli = new CopilotCli($strategyFactory);
 
-    $reflection = new ReflectionClass($copilotCli);
-    $method = $reflection->getMethod('isRunningInTestbench');
-    $method->setAccessible(true);
-
-    // When vendor/bin/testbench is used, TESTBENCH_CORE constant is defined
-    // In unit tests without actual testbench command, it returns false
-    $result = $method->invoke($copilotCli);
-    expect($result)->toBeBool();
+    $result = $copilotCli->isRunningInTestbench();
+    expect($result)->toBeTrue();
 });
 
 test('CopilotCli converts command to testbench when TESTBENCH_CORE is defined', function (): void {
