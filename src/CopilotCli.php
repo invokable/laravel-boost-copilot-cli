@@ -78,8 +78,7 @@ class CopilotCli extends CodeEnvironment implements Agent, McpClient
      */
     public function mcpServerConfig(string $command, array $args = [], array $env = []): array
     {
-        // Build server configuration with type and tools fields
-        $config = [
+        return [
             'type' => 'local',
             'command' => $this->convertCommandToPhpPath($command),
             'args' => array_values(array_filter([
@@ -89,8 +88,6 @@ class CopilotCli extends CodeEnvironment implements Agent, McpClient
             'env' => $env,
             'tools' => ['*'],
         ];
-
-        return $this->removeEmptyArrays($config);
     }
 
     /**
@@ -107,25 +104,6 @@ class CopilotCli extends CodeEnvironment implements Agent, McpClient
             'sail' => './vendor/bin/sail',
             default => $command,
         };
-    }
-
-    /**
-     * Recursively remove empty arrays from config to avoid compatibility issues.
-     * Some MCP tools fail when encountering empty arrays (e.g., "headers": []).
-     */
-    protected function removeEmptyArrays(array $data): array
-    {
-        foreach ($data as $key => $value) {
-            if (is_array($value)) {
-                if (empty($value)) {
-                    unset($data[$key]);
-                } else {
-                    $data[$key] = $this->removeEmptyArrays($value);
-                }
-            }
-        }
-
-        return $data;
     }
 
     protected function isRunningInTestbench(): bool
