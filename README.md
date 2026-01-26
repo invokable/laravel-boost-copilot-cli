@@ -10,7 +10,7 @@
 
 - PHP >= 8.2
 - Laravel >= 12.x
-- [Laravel Boost](https://github.com/laravel/boost) >= 1.7
+- [Laravel Boost](https://github.com/laravel/boost) >= 2.0
 - [Copilot CLI](https://github.com/github/copilot-cli) >= 0.0.343
 
 ## Supported Platforms
@@ -93,10 +93,11 @@ composer require revolution/laravel-boost-copilot-cli --dev
 
 When you run the Laravel Boost installation command within your Laravel project, you'll see a `GitHub Copilot CLI` item added to the list. 
 
-- Select `GitHub Copilot CLI` for the editor. This will create `.github/mcp-config.json`.
-- Select `GitHub Copilot(Custom instructions)` for the guidelines. This will create `.github/instructions/laravel-boost.instructions.md`.
-
-If you want to create the regular `.github/copilot-instructions.md`, select `GitHub Copilot` for the guidelines.
+- First, you will see `Which Boost features would you like to configure?`. The files will be installed depending on the features you select.
+  - `AI Guidelines`: `.github/instructions/laravel-boost.instructions.md`
+  - `Agent Skills`: `.github/skills`
+  - `Boost MCP Server Configuration`: `.github/mcp-config.json`
+- Next, you will see `Which AI agents would you like to configure?`. Select `GitHub Copilot CLI` for the AI agent.
 
 ```shell
 php artisan boost:install
@@ -172,9 +173,6 @@ Example `.github/mcp-config.local.json`:
   }
 }
 ```
-
-## TODO
-- Migrate to Agent Skills when Laravel Boost supports it.
 
 ## License
 

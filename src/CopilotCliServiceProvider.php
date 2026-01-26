@@ -15,7 +15,7 @@ class CopilotCliServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        Boost::registerCodeEnvironment('copilot-cli', CopilotCli::class);
+        Boost::registerAgent('copilot-cli', CopilotCli::class);
 
         if (defined('TESTBENCH_CORE')) {
             $this->testbench();

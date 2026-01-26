@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Revolution\Laravel\Boost;
 
 use Illuminate\Support\Str;
-use Laravel\Boost\Contracts\Agent;
-use Laravel\Boost\Contracts\McpClient;
-use Laravel\Boost\Install\CodeEnvironment\CodeEnvironment;
+use Laravel\Boost\Contracts\SupportsGuidelines;
+use Laravel\Boost\Contracts\SupportsMcp;
+use Laravel\Boost\Contracts\SupportsSkills;
+use Laravel\Boost\Install\Agents\Agent;
 use Laravel\Boost\Install\Enums\Platform;
 
-class CopilotCli extends CodeEnvironment implements Agent, McpClient
+class CopilotCli extends Agent implements SupportsGuidelines, SupportsMcp, SupportsSkills
 {
     protected static bool $fake = false;
 
@@ -49,21 +50,21 @@ class CopilotCli extends CodeEnvironment implements Agent, McpClient
     }
 
     /**
-     * Get the display name of the Agent.
-     */
-    public function agentName(): ?string
-    {
-        return 'GitHub Copilot(Custom instructions)';
-    }
-
-    /**
      * Get the file path where AI guidelines should be written.
      *
      * @return string The relative or absolute path to the guideline file
      */
     public function guidelinesPath(): string
     {
-        return config('boost.code_environments.copilot_custom.guidelines_path', '.github/instructions/laravel-boost.instructions.md');
+        return config('boost.agents.copilot_cli.guidelines_path', '.github/instructions/laravel-boost.instructions.md');
+    }
+
+    /**
+     * Get the file path where agent skills should be written.
+     */
+    public function skillsPath(): string
+    {
+        return config('boost.agents.copilot_cli.skills_path', '.github/skills');
     }
 
     public function mcpConfigPath(): string
