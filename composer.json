@@ -1,6 +1,6 @@
 {
     "name": "revolution/laravel-boost-copilot-cli",
-    "description": "Laravel Boost Custom CodeEnvironment for GitHub Copilot CLI",
+    "description": "Laravel Boost Custom Agent for GitHub Copilot CLI",
     "keywords": [
         "laravel",
         "boost",
