@@ -8,7 +8,7 @@ This is a Laravel package that provides custom CodeEnvironment integration for G
 
 - **Language**: PHP 8.2+
 - **Framework**: Laravel 12.x+
-- **Dependencies**: Laravel Boost 1.8+
+- **Dependencies**: Laravel Boost 2.0+
 - **Target Platforms**: macOS, WSL, Linux (Native Windows not supported)
 - **Testing**: Pest PHP 4.x
 - **Code Quality**: Laravel Pint (PSR-12)
