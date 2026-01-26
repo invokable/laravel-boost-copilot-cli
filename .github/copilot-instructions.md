@@ -24,8 +24,7 @@ composer run test:lint     # Check code formatting
 
 ### Core Components
 
-1. **CopilotCli.php**: Main CodeEnvironment implementation
-   - Implements `Agent` `McpClient` interfaces
+1. **CopilotCli.php**: Main `Agent` implementation
    - Handles detection, configuration, and MCP installation
 
 2. **CopilotCliServiceProvider.php**: Laravel service provider
