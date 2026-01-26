@@ -1,4 +1,4 @@
-# Laravel Boost Custom CodeEnvironment for GitHub Copilot CLI
+# Laravel Boost Custom Agent for GitHub Copilot CLI
 
 [![tests](https://github.com/invokable/laravel-boost-copilot-cli/actions/workflows/tests.yml/badge.svg)](https://github.com/invokable/laravel-boost-copilot-cli/actions/workflows/tests.yml)
 [![Maintainability](https://qlty.sh/badges/d6389009-a7b8-45fe-a7b3-f07e4ff25a25/maintainability.svg)](https://qlty.sh/gh/invokable/projects/laravel-boost-copilot-cli)
