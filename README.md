@@ -13,6 +13,9 @@
 - [Laravel Boost](https://github.com/laravel/boost) >= 2.0
 - [Copilot CLI](https://github.com/github/copilot-cli) >= 0.0.343
 
+### Suggest
+- [laravel-copilot-sdk](https://github.com/invokable/laravel-copilot-sdk) Copilot SDK for Laravel
+
 ## Supported Platforms
 
 - macOS
@@ -177,9 +180,6 @@ Example `.github/mcp-config.local.json`:
 ## Known issues
 
 Copilot CLI does not load instructions after the `<`. This means that Laravel Boost's `<laravel-boost-guidelines>` is not loaded at all. Instruct `.github/copilot-instructions.md` to load `laravel-boost.instructions.md`.
-
-## Suggest
-- [laravel-copilot-sdk](https://github.com/invokable/laravel-copilot-sdk) Copilot SDK for Laravel
 
 ## License
 
