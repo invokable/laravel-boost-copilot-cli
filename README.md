@@ -174,6 +174,10 @@ Example `.github/mcp-config.local.json`:
 }
 ```
 
+## Known issues
+
+Copilot CLI does not load instructions after the `<`. This means that Laravel Boost's `<laravel-boost-guidelines>` is not loaded at all. Instruct `.github/copilot-instructions.md` to load `laravel-boost.instructions.md`.
+
 ## License
 
 MIT
