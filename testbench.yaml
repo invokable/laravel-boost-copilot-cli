@@ -1,9 +1,5 @@
 laravel: '@testbench'
 
-env:
-  # Required for Laravel Boost to function properly
-  CACHE_STORE: array
-
 providers:
   # - Workbench\App\Providers\WorkbenchServiceProvider
 

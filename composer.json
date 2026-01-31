@@ -27,7 +27,10 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\": "tests/",
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
         }
     },
     "authors": [
@@ -48,15 +51,28 @@
     },
     "minimum-stability": "stable",
     "scripts": {
-        "test": "pest",
-        "test:coverage": "pest --coverage --coverage-clover build/logs/clover.xml",
+        "test": "pest --compact",
+        "test:coverage": "pest --compact --coverage --coverage-clover build/logs/clover.xml",
         "lint": [
             "pint"
         ],
         "test:lint": [
             "pint --test"
         ],
-        "boost": "vendor/bin/testbench boost:install --no-interaction --ansi"
+        "boost": "vendor/bin/testbench boost:install --no-interaction --ansi",
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare",
+            "@build"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@build",
+            "@php vendor/bin/testbench serve --ansi"
+        ]
     },
     "config": {
         "allow-plugins": {
