@@ -25,7 +25,8 @@ Next, add `@build` to the `post-autoload-dump` scripts in your `composer.json`:
             "@prepare",
             "@build"
         ],
-        "build": "@php vendor/bin/testbench workbench:build --ansi"
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "boost": "vendor/bin/testbench boost:install --no-interaction --ansi"
     }
 }
 ```
