@@ -13,7 +13,9 @@ use Laravel\Boost\Install\Enums\Platform;
 
 class CopilotCli extends Agent implements SupportsGuidelines, SupportsMcp, SupportsSkills
 {
-    protected static bool $fake = false;
+    protected static bool $fake_testbench = false;
+
+    protected static bool $fake_wsl = false;
 
     public function name(): string
     {
@@ -32,9 +34,16 @@ class CopilotCli extends Agent implements SupportsGuidelines, SupportsMcp, Suppo
      */
     public function systemDetectionConfig(Platform $platform): array
     {
-        return [
-            'command' => 'command -v copilot',
-        ];
+        return match ($platform) {
+            // Mac, Linux, WSL
+            Platform::Darwin, Platform::Linux => [
+                'command' => 'command -v copilot',
+            ],
+            // Native Windows
+            Platform::Windows => [
+                'command' => 'where copilot 2>nul',
+            ],
+        };
     }
 
     /**
@@ -102,16 +111,28 @@ class CopilotCli extends Agent implements SupportsGuidelines, SupportsMcp, Suppo
             return './vendor/bin/testbench';
         }
 
+        if ($this->isRunningInsideWsl()) {
+            return $this->getPhpPath();
+        }
+
         return match (Str::afterLast($command, '/')) {
-            'wsl', 'wsl.exe' => 'php',
             'sail' => './vendor/bin/sail',
             default => $command,
         };
     }
 
+    protected function isRunningInsideWsl(): bool
+    {
+        if (static::$fake_wsl) {
+            return true;
+        }
+
+        return ! empty(getenv('WSL_DISTRO_NAME')) || ! empty(getenv('IS_WSL'));
+    }
+
     public function isRunningInTestbench(): bool
     {
-        if (static::$fake) {
+        if (static::$fake_testbench) {
             return true;
         }
 
@@ -119,10 +140,11 @@ class CopilotCli extends Agent implements SupportsGuidelines, SupportsMcp, Suppo
     }
 
     /**
-     * Indicates if the Copilot CLI is being faked testbench for testing purposes.
+     * Indicates if the Copilot CLI is being faked for testing purposes.
      */
-    public static function fake(bool $fake = true): void
+    public static function fake(bool $testbench = true, bool $wsl = true): void
     {
-        static::$fake = $fake;
+        static::$fake_testbench = $testbench;
+        static::$fake_wsl = $wsl;
     }
 }

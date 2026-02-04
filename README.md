@@ -14,14 +14,14 @@
 - [Copilot CLI](https://github.com/github/copilot-cli) >= 0.0.343
 
 ### Suggest
+- [laravel-boost-phpstorm-copilot](https://github.com/invokable/laravel-boost-phpstorm-copilot) Laravel Boost for PhpStorm with Copilot plugin
 - [laravel-copilot-sdk](https://github.com/invokable/laravel-copilot-sdk) Copilot SDK for Laravel
 
 ## Supported Platforms
 
 - macOS
 - WSL
-  - Native Windows is not supported, please use [laravel-boost-phpstorm-copilot](https://github.com/invokable/laravel-boost-phpstorm-copilot)
-  - If you manually create an MCP config file, you can use Laravel Boost without this package.
+  - Native Windows can also be installed, but WSL is still recommended.
 - Linux
 
 ### Laravel Sail

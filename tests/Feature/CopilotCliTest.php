@@ -69,12 +69,15 @@ test('CopilotCli mcpServerConfig returns correct structure', function (): void {
 });
 
 test('CopilotCli converts wsl command to php', function (): void {
+    CopilotCli::fake(testbench: false, wsl: true);
     $strategyFactory = Mockery::mock(DetectionStrategyFactory::class);
     $copilotCli = new CopilotCli($strategyFactory);
 
     expect($copilotCli->convertCommandToPhpPath('wsl'))->toBe('php')
         ->and($copilotCli->convertCommandToPhpPath('wsl.exe'))->toBe('php')
         ->and($copilotCli->convertCommandToPhpPath('/usr/bin/wsl'))->toBe('php');
+
+    CopilotCli::fake(testbench: false, wsl: false);
 });
 
 test('CopilotCli converts sail command to vendor/bin/sail', function (): void {
