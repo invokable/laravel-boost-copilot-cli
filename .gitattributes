@@ -14,3 +14,4 @@ pint.json export-ignore
 boost.json export-ignore
 testbench.yaml export-ignore
 /.ai export-ignore
+/workbench export-ignore
