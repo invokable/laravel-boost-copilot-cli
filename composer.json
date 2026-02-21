@@ -10,7 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "illuminate/support": "^12.30",
+        "illuminate/support": "^12.30||^13.0",
         "laravel/boost": "^2.0"
     },
     "require-dev": {
