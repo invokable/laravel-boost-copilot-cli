@@ -11,7 +11,7 @@
 - PHP >= 8.2
 - Laravel >= 12.x
 - [Laravel Boost](https://github.com/laravel/boost) >= 2.0
-- [Copilot CLI](https://github.com/github/copilot-cli) >= 0.0.343
+- [Copilot CLI](https://github.com/github/copilot-cli) >= 1.0
 
 ### Suggest
 - [laravel-boost-phpstorm-copilot](https://github.com/invokable/laravel-boost-phpstorm-copilot) Laravel Boost for PhpStorm with Copilot plugin
