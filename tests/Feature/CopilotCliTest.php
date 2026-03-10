@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use Laravel\Boost\Install\Detection\DetectionStrategyFactory;
+use Laravel\Boost\Install\Enums\McpInstallationStrategy;
+use Laravel\Boost\Install\Enums\Platform;
 use Revolution\Laravel\Boost\CopilotCli;
 
 test('CopilotCli returns correct name', function (): void {
@@ -30,7 +32,7 @@ test('CopilotCli system detection config uses "command -v" command', function ()
     $strategyFactory = Mockery::mock(DetectionStrategyFactory::class);
     $copilotCli = new CopilotCli($strategyFactory);
 
-    $config = $copilotCli->systemDetectionConfig(\Laravel\Boost\Install\Enums\Platform::Darwin);
+    $config = $copilotCli->systemDetectionConfig(Platform::Darwin);
 
     expect($config)->toHaveKey('command')
         ->and($config['command'])->toBe('command -v copilot');
@@ -51,7 +53,7 @@ test('CopilotCli uses FILE installation strategy', function (): void {
     $copilotCli = new CopilotCli($strategyFactory);
 
     expect($copilotCli->mcpInstallationStrategy())
-        ->toBe(\Laravel\Boost\Install\Enums\McpInstallationStrategy::FILE);
+        ->toBe(McpInstallationStrategy::FILE);
 });
 
 test('CopilotCli mcpServerConfig returns correct structure', function (): void {
