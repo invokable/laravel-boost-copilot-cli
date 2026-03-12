@@ -41,7 +41,7 @@ class CopilotCli extends Agent implements SupportsGuidelines, SupportsMcp, Suppo
             ],
             // Native Windows
             Platform::Windows => [
-                'command' => 'where copilot 2>nul',
+                'command' => 'cmd /c where copilot 2>nul',
             ],
         };
     }
