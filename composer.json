@@ -11,11 +11,11 @@
     "require": {
         "php": "^8.2",
         "illuminate/support": "^12.30||^13.0",
-        "laravel/boost": "^2.0"
+        "laravel/boost": "^2.3.2"
     },
     "require-dev": {
         "laravel/pint": "^1.25",
-        "orchestra/testbench": "^10.6",
+        "orchestra/testbench": "^10.6||^11.0",
         "pestphp/pest": "^4.1",
         "mockery/mockery": "^1.6",
         "pestphp/pest-plugin-laravel": "^4.0"

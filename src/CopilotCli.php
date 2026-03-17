@@ -115,10 +115,7 @@ class CopilotCli extends Agent implements SupportsGuidelines, SupportsMcp, Suppo
             return $this->getPhpPath();
         }
 
-        return match (Str::afterLast($command, '/')) {
-            'sail' => './vendor/bin/sail',
-            default => $command,
-        };
+        return $command;
     }
 
     protected function isRunningInsideWsl(): bool

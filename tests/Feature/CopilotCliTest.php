@@ -82,14 +82,6 @@ test('CopilotCli converts wsl command to php', function (): void {
     CopilotCli::fake(testbench: false, wsl: false);
 });
 
-test('CopilotCli converts sail command to vendor/bin/sail', function (): void {
-    $strategyFactory = Mockery::mock(DetectionStrategyFactory::class);
-    $copilotCli = new CopilotCli($strategyFactory);
-
-    expect($copilotCli->convertCommandToPhpPath('./vendor/bin/sail'))->toBe('./vendor/bin/sail')
-        ->and($copilotCli->convertCommandToPhpPath('/home/user/project/vendor/bin/sail'))->toBe('./vendor/bin/sail');
-});
-
 test('CopilotCli uses other commands as-is', function (): void {
     $strategyFactory = Mockery::mock(DetectionStrategyFactory::class);
     $copilotCli = new CopilotCli($strategyFactory);
