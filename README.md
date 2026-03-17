@@ -40,87 +40,22 @@ composer require revolution/laravel-boost-copilot-cli --dev
 
 ## Usage
 
-When you run the Laravel Boost installation command within your Laravel project, you'll see a `GitHub Copilot CLI` item added to the list. 
+When you run the Laravel Boost installation command within your Laravel project, you'll see a `GitHub Copilot CLI` item added to the list.
 
 - First, you will see `Which Boost features would you like to configure?`. The files will be installed depending on the features you select.
   - `AI Guidelines`: `.github/instructions/laravel-boost.instructions.md`
   - `Agent Skills`: `.github/skills`
-  - `Boost MCP Server Configuration`: `.github/mcp-config.json`
+  - `Boost MCP Server Configuration`: `.vscode/mcp.json`
 - Next, you will see `Which AI agents would you like to configure?`. Select `GitHub Copilot CLI` for the AI agent.
 
 ```shell
 php artisan boost:install
 ```
 
-When running the copilot command, specify `.github/mcp-config.json` using the `--additional-mcp-config` option.
-
-```shell
-copilot --additional-mcp-config @.github/mcp-config.json
-```
-
-If, after starting Copilot, `Configured MCP servers: laravel-boost` appears, the setup was successful.
-
-From now on, always specify the `--additional-mcp-config` option when using the `copilot` command. It can be used together with other options.
-
-```shell
-copilot --additional-mcp-config @.github/mcp-config.json --resume
-```
-
-```shell
-copilot --additional-mcp-config @.github/mcp-config.json --continue
-```
-
-### Autoloading `mcp-config.json`
-
-`.bashrc` or `.zshrc` can be modified to automatically load the `mcp-config.json` file if it exists in the current project.
-
-```shell
-copilot_mcp() {
-  local args=()
-
-  if [ -f ".github/mcp-config.json" ]; then
-    args+=(--additional-mcp-config @.github/mcp-config.json)
-  fi
-
-  if [ -f ".github/mcp-config.local.json" ]; then
-    args+=(--additional-mcp-config @.github/mcp-config.local.json)
-  fi
-
-  copilot "${args[@]}" "$@"
-}
-
-alias copilot=copilot_mcp
-```
+Copilot CLI automatically loads the `.vscode/mcp.json` configuration file from the project root, so no additional options are needed.
 
 ```shell
 copilot
-copilot --resume
-copilot --continue
-```
-
-### Local MCP Configuration
-
-For MCP servers that require sensitive credentials (like Authorization headers), create `.github/mcp-config.local.json` for local-only settings. Add it to `.gitignore` to keep credentials out of version control.
-
-```shell
-echo ".github/mcp-config.local.json" >> .gitignore
-```
-
-Example `.github/mcp-config.local.json`:
-
-```json
-{
-  "mcpServers": {
-    "remote-mcp": {
-      "type": "http",
-      "url": "https://example.com/mcp",
-      "headers": {
-        "Authorization": "Bearer YOUR_TOKEN"
-      },
-      "tools": ["*"]
-    }
-  }
-}
 ```
 
 ## Known issues

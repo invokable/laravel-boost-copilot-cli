@@ -78,12 +78,12 @@ class CopilotCli extends Agent implements SupportsGuidelines, SupportsMcp, Suppo
 
     public function mcpConfigKey(): string
     {
-        return 'mcpServers';
+        return 'servers';
     }
 
     public function mcpConfigPath(): string
     {
-        return '.github/mcp-config.json';
+        return '.vscode/mcp.json';
     }
 
     /**
