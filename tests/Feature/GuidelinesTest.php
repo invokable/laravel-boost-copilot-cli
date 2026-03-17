@@ -17,15 +17,7 @@ test('guidelines contain GitHub Copilot CLI section', function (): void {
     $content = File::get($guidelinePath);
 
     expect($content)->toContain('## Laravel Boost for GitHub Copilot CLI')
-        ->and($content)->toContain('MCP Configuration File Required');
-});
-
-test('guidelines contain MCP config restart instruction', function (): void {
-    $guidelinePath = __DIR__.'/../../resources/boost/guidelines/core.blade.php';
-    $content = File::get($guidelinePath);
-
-    expect($content)->toContain('copilot --additional-mcp-config @.github/mcp-config.json --continue')
-        ->and($content)->toContain('--additional-mcp-config');
+        ->and($content)->toContain('.vscode/mcp.json');
 });
 
 test('guidelines contain testbench section', function (): void {
@@ -44,8 +36,7 @@ test('guidelines render correctly without testbench', function (): void {
     $rendered = Blade::render($template);
 
     expect($rendered)->toContain('## Laravel Boost for GitHub Copilot CLI')
-        ->and($rendered)->toContain('MCP Configuration File Required')
-        ->and($rendered)->toContain('copilot --additional-mcp-config @.github/mcp-config.json --continue')
+        ->and($rendered)->toContain('.vscode/mcp.json')
         ->and($rendered)->not->toContain('Laravel Package Development Environment')
         ->and($rendered)->not->toContain('@if');
 });
@@ -61,7 +52,7 @@ test('guidelines render correctly with testbench', function (): void {
     $rendered = Blade::render($template);
 
     expect($rendered)->toContain('## Laravel Boost for GitHub Copilot CLI')
-        ->and($rendered)->toContain('MCP Configuration File Required')
+        ->and($rendered)->toContain('.vscode/mcp.json')
         ->and($rendered)->toContain('Laravel Package Development Environment')
         ->and($rendered)->toContain('vendor/bin/testbench')
         ->and($rendered)->toContain('Not all Laravel Boost MCP tools will work correctly')

@@ -32,7 +32,7 @@ composer run test:lint     # Check code formatting
 
 ### Configuration Files
 - `.github/instructions/laravel-boost.instructions.md`: AI guidelines path
-- `.github/mcp-config.json`: MCP server configuration
+- `.vscode/mcp.json`: MCP server configuration
 
 ## MCP Configuration Format
 
@@ -41,7 +41,7 @@ composer run test:lint     # Check code formatting
 ### Normal Laravel Application
 ```json
 {
-  "mcpServers": {
+  "servers": {
     "laravel-boost": {
       "type": "local",
       "command": "php",
@@ -55,7 +55,7 @@ composer run test:lint     # Check code formatting
 ### Laravel Sail
 ```json
 {
-    "mcpServers": {
+    "servers": {
         "laravel-boost": {
             "type": "local",
             "command": "./vendor/bin/sail",
@@ -74,7 +74,7 @@ composer run test:lint     # Check code formatting
 ### Testbench
 ```json
 {
-    "mcpServers": {
+    "servers": {
         "laravel-boost": {
             "type": "local",
             "command": "./vendor/bin/testbench",

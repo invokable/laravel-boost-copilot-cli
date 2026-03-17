@@ -76,9 +76,14 @@ class CopilotCli extends Agent implements SupportsGuidelines, SupportsMcp, Suppo
         return config('boost.agents.copilot_cli.skills_path', '.github/skills');
     }
 
+    public function mcpConfigKey(): string
+    {
+        return 'servers';
+    }
+
     public function mcpConfigPath(): string
     {
-        return '.github/mcp-config.json';
+        return '.vscode/mcp.json';
     }
 
     /**

@@ -58,11 +58,11 @@ Run the boost installation command using Testbench:
 vendor/bin/testbench boost:install
 ```
 
-This will generate `.github/mcp-config.json` configured for Testbench environment with the following settings:
+This will generate `.vscode/mcp.json` configured for Testbench environment with the following settings:
 
 ```json
 {
-    "mcpServers": {
+    "servers": {
         "laravel-boost": {
             "type": "local",
             "command": "./vendor/bin/testbench",
@@ -82,5 +82,5 @@ This will generate `.github/mcp-config.json` configured for Testbench environmen
 Use Copilot CLI with the generated config:
 
 ```shell
-copilot --additional-mcp-config @.github/mcp-config.json
+copilot
 ```

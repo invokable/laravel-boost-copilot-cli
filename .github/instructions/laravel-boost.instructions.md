@@ -3,14 +3,8 @@
 
 ## Laravel Boost for GitHub Copilot CLI
 
-### MCP Configuration File Required
-
-- If you cannot see the `laravel-boost` MCP server or tools, the user has likely forgotten to specify the MCP configuration file when starting Copilot CLI.
-- Instruct the user to restart Copilot CLI with the correct command:
-  ```
-  copilot --additional-mcp-config @.github/mcp-config.json --continue
-  ```
-- The `--additional-mcp-config` option is **required** for every Copilot CLI session to access Laravel Boost MCP tools.
+This project uses [Laravel Boost](https://github.com/laravel/boost) to provide MCP (Model Context Protocol) tools for GitHub Copilot CLI.
+The MCP server is configured in `.vscode/mcp.json` and automatically loaded by Copilot CLI.
 
 ### Laravel Package Development Environment
 
