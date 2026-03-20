@@ -25,7 +25,7 @@ test('CopilotCli returns correct MCP config path', function (): void {
     $strategyFactory = Mockery::mock(DetectionStrategyFactory::class);
     $copilotCli = new CopilotCli($strategyFactory);
 
-    expect($copilotCli->mcpConfigPath())->toBe('.vscode/mcp.json');
+    expect($copilotCli->mcpConfigPath())->toBe('.mcp.json');
 });
 
 test('CopilotCli system detection config uses "command -v" command', function (): void {

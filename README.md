@@ -45,14 +45,14 @@ When you run the Laravel Boost installation command within your Laravel project,
 - First, you will see `Which Boost features would you like to configure?`. The files will be installed depending on the features you select.
   - `AI Guidelines`: `.github/instructions/laravel-boost.instructions.md`
   - `Agent Skills`: `.github/skills`
-  - `Boost MCP Server Configuration`: `.vscode/mcp.json`
+  - `Boost MCP Server Configuration`: `.mcp.json`
 - Next, you will see `Which AI agents would you like to configure?`. Select `GitHub Copilot CLI` for the AI agent.
 
 ```shell
 php artisan boost:install
 ```
 
-Copilot CLI automatically loads the `.vscode/mcp.json` configuration file from the project root, so no additional options are needed.
+Copilot CLI automatically loads the `.mcp.json` configuration file from the project root, so no additional options are needed.
 
 ```shell
 copilot
