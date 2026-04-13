@@ -11,7 +11,7 @@
 - PHP >= 8.2
 - Laravel >= 12.x
 - [Laravel Boost](https://github.com/laravel/boost) >= 2.0
-- [Copilot CLI](https://github.com/github/copilot-cli) >= 1.0
+- [Copilot CLI](https://github.com/github/copilot-cli) >= 1.0.25
 
 ### Suggest
 - [laravel-boost-phpstorm-copilot](https://github.com/invokable/laravel-boost-phpstorm-copilot) Laravel Boost for PhpStorm with Copilot plugin
@@ -57,10 +57,6 @@ Copilot CLI automatically loads the `.mcp.json` configuration file from the proj
 ```shell
 copilot
 ```
-
-## Known issues
-
-Copilot CLI does not load instructions after the `<`. This means that Laravel Boost's `<laravel-boost-guidelines>` is not loaded at all. Instruct `.github/copilot-instructions.md` to load `laravel-boost.instructions.md`.
 
 ## License
 
