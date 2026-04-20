@@ -58,7 +58,7 @@ Run the boost installation command using Testbench:
 vendor/bin/testbench boost:install
 ```
 
-This will generate `.vscode/mcp.json` configured for Testbench environment with the following settings:
+This will generate `.mcp.json` configured for Testbench environment with the following settings:
 
 ```json
 {
