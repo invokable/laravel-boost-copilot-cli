@@ -6,6 +6,8 @@
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/invokable/laravel-boost-copilot-cli)
 
+Docs: [English](https://kawax.biz/en/packages/laravel-boost-copilot-cli) [Japanese](https://kawax.biz/jp/packages/laravel-boost-copilot-cli)
+
 ## Requirements
 
 - PHP >= 8.2
