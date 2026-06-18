@@ -32,7 +32,7 @@ composer run test:lint     # Check code formatting
 
 ### Configuration Files
 - `.github/instructions/laravel-boost.instructions.md`: AI guidelines path
-- `.mcp.json`: MCP server configuration
+- `.github/mcp.json`: MCP server configuration
 
 ## MCP Configuration Format
 
