@@ -13,7 +13,7 @@ Docs: [English](https://kawax.biz/en/packages/laravel-boost-copilot-cli) [Japane
 - PHP >= 8.2
 - Laravel >= 12.x
 - [Laravel Boost](https://github.com/laravel/boost) >= 2.0
-- [Copilot CLI](https://github.com/github/copilot-cli) >= 1.0.25
+- [Copilot CLI](https://github.com/github/copilot-cli) >= 1.0.61
 
 ### Suggest
 - [laravel-boost-phpstorm-copilot](https://github.com/invokable/laravel-boost-phpstorm-copilot) Laravel Boost for PhpStorm with Copilot plugin
@@ -47,14 +47,14 @@ When you run the Laravel Boost installation command within your Laravel project,
 - First, you will see `Which Boost features would you like to configure?`. The files will be installed depending on the features you select.
   - `AI Guidelines`: `.github/instructions/laravel-boost.instructions.md`
   - `Agent Skills`: `.github/skills`
-  - `Boost MCP Server Configuration`: `.mcp.json`
+  - `Boost MCP Server Configuration`: `.github/mcp.json`
 - Next, you will see `Which AI agents would you like to configure?`. Select `GitHub Copilot CLI` for the AI agent.
 
 ```shell
 php artisan boost:install
 ```
 
-Copilot CLI automatically loads the `.mcp.json` configuration file from the project root, so no additional options are needed.
+Copilot CLI automatically loads the `.github/mcp.json` configuration file from the project root, so no additional options are needed.
 
 ```shell
 copilot

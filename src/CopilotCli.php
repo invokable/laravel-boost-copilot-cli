@@ -78,7 +78,7 @@ class CopilotCli extends Agent implements SupportsGuidelines, SupportsMcp, Suppo
 
     public function mcpConfigPath(): string
     {
-        return config('boost.agents.copilot_cli.mcp_config_path', '.mcp.json');
+        return config('boost.agents.copilot_cli.mcp_config_path', '.github/mcp.json');
     }
 
     /**
