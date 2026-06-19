@@ -63,7 +63,8 @@
         "post-autoload-dump": [
             "@clear",
             "@prepare",
-            "@build"
+            "@build",
+            "@boost"
         ],
         "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
